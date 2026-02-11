@@ -23,7 +23,7 @@ class TestOrderViewSet(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        product = response.data["results"][0]["product"]
+        product = response.data[0]["product"][0]
 
         self.assertEqual(product["title"], self.product.title)
         self.assertEqual(product["price"], self.product.price)
