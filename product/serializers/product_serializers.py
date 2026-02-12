@@ -30,4 +30,3 @@ class ProductSerializer(serializers.ModelSerializer):
             product.category.add(category)
 
         return product
-    
