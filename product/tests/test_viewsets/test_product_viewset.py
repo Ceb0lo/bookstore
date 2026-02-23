@@ -12,9 +12,6 @@ class TestProductViewSet(APITestCase):
 
     def setUp(self):
         self.user = UserFactory()
-        self.token = Token.objects.create(user=self.user)
-        self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
-
         self.product = ProductFactory(
             title="pro controller",
             price=200.00,
