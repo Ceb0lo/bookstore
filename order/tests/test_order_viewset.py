@@ -1,3 +1,4 @@
+from rest_framework.authtoken.models import Token
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -10,6 +11,10 @@ from order.factories import OrderFactory
 class TestOrderViewSet(APITestCase):
 
     def setUp(self):
+        self.user = UserFactory()
+        self.token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
+
         self.category = CategoryFactory(title="technology")
         self.product = ProductFactory(
             title="mouse",
@@ -23,7 +28,7 @@ class TestOrderViewSet(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        product = response.data[0]["product"][0]
+        product = response.data["results"][0]["product"][0]
 
         self.assertEqual(product["title"], self.product.title)
         self.assertEqual(product["price"], self.product.price)
