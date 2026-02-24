@@ -14,7 +14,7 @@ class TestOrderViewSet(APITestCase):
         self.user = UserFactory()
         self.token = Token.objects.create(user=self.user)
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
-        
+
         self.category = CategoryFactory(title="technology")
         self.product = ProductFactory(
             title="mouse",
