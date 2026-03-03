@@ -152,6 +152,9 @@ INTERNAL_IPS = [
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+if not SECRET_KEY:
+    SECRET_KEY = "dev-secret-key-ci"
+
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
